@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="true" thread-count="5">
+<suite name="Suite" parallel="false" thread-count="5">
 	<listeners>
 		<listener class-name="listeners.TestListener"></listener>
 	</listeners>
 	<test thread-count="5" name="Test">
 		<classes>
-			<class name="smoke.LoginTest"></class>
+			<class name="Tests.BookAppointmentTest"><methods>
+			<include name="fillMakeAppointmentForm"></include></methods>
+			</class>
 		</classes>
+	
 	</test> <!--
 	Test -->
 </suite> <!--

@@ -1,16 +1,20 @@
-package smoke;
+package Tests;
+
+import java.io.IOException;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import config.ConfigReader;
 import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
 
 	LoginPage loginPage;
+	ConfigReader config = new ConfigReader();
 
-	@Test(dataProvider = "loginCredentials", groups = "Regression")
+	@Test(dataProvider = "loginCredentials", groups = "regression")
 	public void login(String username, String password, String message) {
 
 		loginPage = new LoginPage(driver);
@@ -22,17 +26,28 @@ public class LoginTest extends BaseTest {
 	}
 
 	@DataProvider(name = "loginCredentials")
-	public Object[][] getData() {
+	public Object[][] getData() throws IOException {
 
-		Object[][] object = { { "John Doe", "ThisIsNotAPassword", "Book Appointment" },
+		Object[][] object = {
+				{ config.getProperty("username"), config.getProperty("password"), config.getProperty("message") },
 				{ "John Doe", "pass1", "Login failed! Please ensure the username and password are valid." },
 				{ "user1", "ThisIsNotAPassword", "Login failed! Please ensure the username and password are valid." },
 				{ "", "", "Login failed! Please ensure the username and password are valid." },
 				{ "", "pass1", "Login failed! Please ensure the username and password are valid." },
-				{ "user1", "", "Login failed! Please ensure the username and password are valid." }
-				};
-		
+				{ "user1", "", "Login failed! Please ensure the username and password are valid." } };
+
 		return object;
+	}
+	
+	@Test(groups = "smoke")
+	public void loginWithValidDetails() throws IOException {
+
+		loginPage = new LoginPage(driver);
+
+		loginPage.clickMakeAppointmentBtn();
+
+		loginPage.userLogin(config.getProperty("username"), config.getProperty("password"),
+				config.getProperty("message"));
 	}
 
 }

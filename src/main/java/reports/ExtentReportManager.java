@@ -12,7 +12,7 @@ public class ExtentReportManager {
 	private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 
 	// Initializes ExtentReports only once (Singleton pattern)
-	public static void initReports() {
+	public static ExtentReports initReports() {
 		
 		if (extent == null) {
 			String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -27,6 +27,7 @@ public class ExtentReportManager {
 			extent.attachReporter(sparkReporter);
 			extent.setSystemInfo("Tester", "Ajay Namala");
 		}
+		return extent;
 	}
 
 	public static synchronized ExtentTest createTest(String testName) {

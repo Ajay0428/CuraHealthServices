@@ -5,6 +5,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -31,14 +32,22 @@ public class DriverFactory {
 			switch (browserName) {
 			case "chrome":
 				WebDriverManager.chromedriver().setup();
-				driver.set(new ChromeDriver());
+				ChromeOptions options = new ChromeOptions();
+
+                // Disable password leak detection prompt
+                options.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding");
+                options.addArguments("--user-data-dir=" + System.getProperty("java.io.tmpdir") + "/chrome-profile");
+                options.addArguments("--incognito");
+                options.addArguments("--disable-sync");
+                options.addArguments("--disable-extensions");
+                options.addArguments("--disable-save-password-bubble");
+
+                driver.set(new ChromeDriver(options));
 				break;
 
 			case "edge":
 				WebDriverManager.edgedriver().setup();
-				// WebDriverManager.edgedriver().driverVersion("138.0.0").setup();
 				driver.set(new EdgeDriver());
-				// driver = new EdgeDriver();
 				break;
 
 			case "firefox":

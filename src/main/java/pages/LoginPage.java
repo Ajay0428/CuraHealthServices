@@ -58,7 +58,7 @@ public class LoginPage {
 
 		String actualMessageString;
 
-		if (titleString.contains(actualString)) {
+		if (titleString.toLowerCase().contains(actualString)) {
 			WebElement messageElement = driver.findElement(By.id("btn-book-appointment"));
 			actualMessageString = wait.until(ExpectedConditions.visibilityOf(messageElement)).getText();
 		} else {
