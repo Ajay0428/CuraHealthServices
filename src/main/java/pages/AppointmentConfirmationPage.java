@@ -28,6 +28,9 @@ public class AppointmentConfirmationPage {
 
 	@FindBy(xpath = "//label[contains(text(),'Comment')]/parent::div/parent::div/div[2]")
 	WebElement commentBoxValueElement;
+	
+	@FindBy(xpath = "//a[contains(text(),'Homepage')]")
+	WebElement goToHomepageBtnElement;
 
 	public String getTextFacility() {
 		String facilityValue = facilityValueElement.getText();
@@ -52,6 +55,10 @@ public class AppointmentConfirmationPage {
 	public String getTextComments() {
 		String commentsValue = commentBoxValueElement.getText();
 		return commentsValue; 
+	}
+	
+	public void goToHomePage() {
+		 goToHomepageBtnElement.click();
 	}
 	
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import utils.*;
 import base.BaseTest;
 import config.ConfigReader;
 import pages.LoginPage;
@@ -14,7 +15,7 @@ public class LoginTest extends BaseTest {
 	LoginPage loginPage;
 	ConfigReader config = new ConfigReader();
 
-	@Test(dataProvider = "loginCredentials", groups = "regression")
+	@Test(dataProvider = "loginCredentials", groups = "regression",retryAnalyzer = RetryAnalyzer.class)
 	public void login(String username, String password, String message) {
 
 		loginPage = new LoginPage(driver);

@@ -1,0 +1,5 @@
+# Created at 2025-08-16T04:46:41.501
+Boot Manifest-JAR contains absolute paths in classpath 'D:\eclipse-workspace\CuraHealthServices\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

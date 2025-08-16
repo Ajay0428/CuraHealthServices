@@ -13,7 +13,7 @@ public class test extends BaseTest {
 	WebDriver driver;
 
 	@Test
-	public void openGoogle() throws InterruptedException, IOException {
+	public void openURL() throws InterruptedException, IOException {
 
 		Assert.assertFalse(true);
 		System.out.println(DriverFactory.getDriver().getCurrentUrl());
