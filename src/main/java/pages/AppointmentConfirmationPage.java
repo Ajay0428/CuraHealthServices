@@ -33,28 +33,23 @@ public class AppointmentConfirmationPage {
 	WebElement goToHomepageBtnElement;
 
 	public String getTextFacility() {
-		String facilityValue = facilityValueElement.getText();
-		return facilityValue;
+		return facilityValueElement.getText();
 	}
 
 	public boolean isTrueApplyForHospitalReadmission() {
-		boolean isTrueApplyForHospitalReadmission =  applyForHospitalReadmissionValueElement.getText().contains("Yes");
-		return isTrueApplyForHospitalReadmission;
+		return applyForHospitalReadmissionValueElement.getText().contains("Yes");
 	}
 	
 	public String getTextHealthcareProgram() {
-		String healthcareProgramValue = healthcareprogramValueElement.getText();
-		return healthcareProgramValue; 
+		return healthcareprogramValueElement.getText(); 
 	}
 	
 	public String getTextVisitdate() {
-		String visitdateValue = visitDateValueElement.getText();
-		return visitdateValue; 
+		return visitDateValueElement.getText(); 
 	}
 	
 	public String getTextComments() {
-		String commentsValue = commentBoxValueElement.getText();
-		return commentsValue; 
+		return commentBoxValueElement.getText(); 
 	}
 	
 	public void goToHomePage() {

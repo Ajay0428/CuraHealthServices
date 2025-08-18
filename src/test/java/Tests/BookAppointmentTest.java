@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import utils.RetryAnalyzer;
 import base.BaseTest;
 import config.ConfigReader;
 import pages.AppointmentConfirmationPage;
@@ -16,7 +17,7 @@ public class BookAppointmentTest extends BaseTest {
 	ConfigReader config = new ConfigReader();
 	LoginPage loginPage;
 
-	@Test(dataProvider = "appointmentData")
+	@Test(dataProvider = "appointmentData", retryAnalyzer = RetryAnalyzer.class)
 	public void fillMakeAppointmentForm(String facility, String healthCareProgramoption, String visitDate,
 			String comments) throws IOException {
 		loginPage = new LoginPage(driver);
@@ -41,7 +42,7 @@ public class BookAppointmentTest extends BaseTest {
 
 	@DataProvider(name = "appointmentData")
 	public Object[][] getData() {
-		return new Object[][] { { "Seoul CURA Healthcare Center", "Medicaid", "23/03/2000", "CommentText" } };
+		return new Object[][] { { "Seoul CURA Healthcare Center", "Medicaid", "23/03/2000", "Comment1" } };
 	}
 
 }

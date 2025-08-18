@@ -12,10 +12,9 @@ import config.ConfigReader;
 import drivers.DriverFactory;
 
 public class BaseTest {
-
 	protected WebDriver driver;
-	DriverFactory driverFactory = new DriverFactory();
 	ConfigReader config = new ConfigReader();
+	DriverFactory driverFactory = new DriverFactory();
 
 	@BeforeMethod
 	public void setup(Method method, ITestContext context) throws IOException {

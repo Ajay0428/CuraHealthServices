@@ -41,6 +41,8 @@ public class DriverFactory {
                 options.addArguments("--disable-sync");
                 options.addArguments("--disable-extensions");
                 options.addArguments("--disable-save-password-bubble");
+                @SuppressWarnings("deprecation") String uniqueProfile = System.getProperty("java.io.tmpdir") + "/chrome-profile-" + Thread.currentThread().getId();
+				options.addArguments("--user-data-dir=" + uniqueProfile);
 
                 driver.set(new ChromeDriver(options));
 				break;

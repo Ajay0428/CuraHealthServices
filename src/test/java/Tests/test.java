@@ -2,21 +2,61 @@ package Tests;
 
 import java.io.IOException;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
-import drivers.DriverFactory;
+import utils.RetryAnalyzer;
 
 public class test extends BaseTest {
-	WebDriver driver;
+/*
+ * Change the url to google to run this tests
+ */
+	@Test(retryAnalyzer = RetryAnalyzer.class)
+	public void ABC1() throws InterruptedException, IOException {
 
-	@Test
-	public void openURL() throws InterruptedException, IOException {
+		Assert.assertFalse(false);
 
-		Assert.assertFalse(true);
-		System.out.println(DriverFactory.getDriver().getCurrentUrl());
+		driver.findElement(By.name("q")).sendKeys("Automation Testing");
+		System.out.println("1");
 	}
+
+	@Test(retryAnalyzer = RetryAnalyzer.class)
+	public void ABC2() throws InterruptedException, IOException {
+
+		Assert.assertFalse(false);
+
+		driver.findElement(By.name("q")).sendKeys("Automation Testing");
+		System.out.println("2");
+	}
+
+	@Test(retryAnalyzer = RetryAnalyzer.class)
+	public void ABC3() throws InterruptedException, IOException {
+
+		Assert.assertFalse(false);
+
+		driver.findElement(By.name("q")).sendKeys("Automation Testing");
+		System.out.println("3");
+	}
+
+	@Test(retryAnalyzer = RetryAnalyzer.class)
+	public void ABC4() throws InterruptedException, IOException {
+
+		Assert.assertFalse(false);
+
+		driver.findElement(By.name("q")).sendKeys("Automation Testing");
+		System.out.println("4");
+	}
+
+	@Test(retryAnalyzer = RetryAnalyzer.class)
+	public void ABC5() throws InterruptedException, IOException {
+
+		Assert.assertFalse(false);
+
+		driver.findElement(By.name("q")).sendKeys("Automation Testing");
+		System.out.println("5");
+	}
+
 
 }
