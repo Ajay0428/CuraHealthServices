@@ -43,7 +43,9 @@ public class LoginPage {
 		makeAppointmentBtnElement.click();
 	}
 
-	public BookAppointmentPage userLogin(String username, String Password, String message) {
+	public BookAppointmentPage userLogin(String username, String Password, String message) throws InterruptedException {
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(usernameInputElement));
@@ -51,6 +53,8 @@ public class LoginPage {
 		usernameInputElement.sendKeys(username);
 		passwordInputElement.sendKeys(Password);
 		loginBtnElement.click();
+
+		Thread.sleep(500);
 
 		String titleString = driver.getCurrentUrl();
 
@@ -66,7 +70,7 @@ public class LoginPage {
 			actualMessageString = wait.until(ExpectedConditions.visibilityOf(messageElement)).getText();
 		}
 		Assert.assertEquals(actualMessageString.toLowerCase(), message.toLowerCase(), "You landed into incorrect page");
-		
+
 		return new BookAppointmentPage(driver);
 	}
 

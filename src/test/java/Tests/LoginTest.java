@@ -16,7 +16,7 @@ public class LoginTest extends BaseTest {
 	ConfigReader config = new ConfigReader();
 
 	@Test(dataProvider = "loginCredentials", groups = "regression",retryAnalyzer = RetryAnalyzer.class)
-	public void login(String username, String password, String message) {
+	public void login(String username, String password, String message) throws InterruptedException {
 
 		loginPage = new LoginPage(driver);
 
@@ -41,7 +41,7 @@ public class LoginTest extends BaseTest {
 	}
 	
 	@Test(groups = "smoke")
-	public void loginWithValidDetails() throws IOException {
+	public void loginWithValidDetails() throws IOException, InterruptedException {
 
 		loginPage = new LoginPage(driver);
 

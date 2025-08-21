@@ -19,7 +19,7 @@ public class BookAppointmentTest extends BaseTest {
 
 	@Test(dataProvider = "appointmentData", retryAnalyzer = RetryAnalyzer.class)
 	public void fillMakeAppointmentForm(String facility, String healthCareProgramoption, String visitDate,
-			String comments) throws IOException {
+			String comments) throws IOException, InterruptedException {
 		loginPage = new LoginPage(driver);
 		loginPage.clickMakeAppointmentBtn();
 		BookAppointmentPage bookAppointmentPage = loginPage.userLogin(config.getProperty("username"),
@@ -42,7 +42,46 @@ public class BookAppointmentTest extends BaseTest {
 
 	@DataProvider(name = "appointmentData")
 	public Object[][] getData() {
-		return new Object[][] { { "Seoul CURA Healthcare Center", "Medicaid", "23/03/2000", "Comment1" } };
+		return new Object[][] { { "Seoul CURA Healthcare Center", "Medicaid", "23/03/2000", "Comment1" },
+			{ "Tokyo CURA Healthcare Center", "Medicaid", "23/03/2000", "Comment1" },
+			{ "Hongkong CURA Healthcare Center", "Medicaid", "23/03/2000", "Comment1" },
+			{ "Tokyo CURA Healthcare Center", "Medicare", "23/03/2000", "Comment1" },
+			{ "Tokyo CURA Healthcare Center", "None", "23/03/2000", "Comment1" },
+			{ "Tokyo CURA Healthcare Center", "None", "23/03/2000", "Comment1" },
+			{ "Hongkong CURA Healthcare Center", "Medicare", "23/03/2000", "Comment1" },
+			{ "Hongkong CURA Healthcare Center", "None", "23/03/2000", "Comment1" },
+			{ "Hongkong CURA Healthcare Center", "Medicaid", "23/03/2000", "Test1" },
+			{ "Hongkong CURA Healthcare Center", "Medicare", "23/03/2026", "Comment1" }
+		};
+	}
+	
+	@Test(dataProvider = "appointmentData2", retryAnalyzer = RetryAnalyzer.class)
+	public void fillMakeAppointmentFormWithoutHospitalReadmission(String facility, String healthCareProgramoption, String visitDate,
+			String comments) throws IOException, InterruptedException {
+		loginPage = new LoginPage(driver);
+		loginPage.clickMakeAppointmentBtn();
+		BookAppointmentPage bookAppointmentPage = loginPage.userLogin(config.getProperty("username"),
+				config.getProperty("password"), config.getProperty("message"));
+
+		bookAppointmentPage.selectFacility(facility);
+		bookAppointmentPage.selectRadioBtnHealthCareProgram(healthCareProgramoption);
+		bookAppointmentPage.selectVisitDate(visitDate);
+		bookAppointmentPage.enterComments(comments);
+		AppointmentConfirmationPage appointmentConfirmationPage = bookAppointmentPage.clickBookAppointmentBtn();
+
+		assertEquals(facility, appointmentConfirmationPage.getTextFacility());
+		assertEquals(false, appointmentConfirmationPage.isTrueApplyForHospitalReadmission());
+		assertEquals(healthCareProgramoption, appointmentConfirmationPage.getTextHealthcareProgram());
+		assertEquals(visitDate, appointmentConfirmationPage.getTextVisitdate());
+		assertEquals(comments, appointmentConfirmationPage.getTextComments());
+
+	}
+	
+	@DataProvider(name = "appointmentData2")
+	public Object[][] getData2() {
+		return new Object[][] { { "Seoul CURA Healthcare Center", "Medicaid", "23/03/2000", "Comment1" }
+
+		};
 	}
 
 }
